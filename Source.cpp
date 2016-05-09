@@ -1,6 +1,9 @@
 #include <iostream>
 #include <map>
 #include <string>
+#include <stdarg.h>
+#include <vector>
+#include <iterator>
 
 using namespace std;
 
@@ -27,19 +30,21 @@ public:
 			cout << "Function does not exist." << endl;
 	}
 
-	void operator()(string funcName){
+	void operator()(string funcName, int count, ...){
+		va_list vl;
+		vector<int> args;
 		funcs[funcName]();
 	}
 };
 
-void print(void){
+void print(int count, ...){
 	cout << "test" << endl;
 }
 
 
-int add(int a, int b)
+int add(int count, ...)
 {
-	return a + b;
+	//return a + b;
 }
 
 
@@ -49,11 +54,11 @@ int main() {
 	funcs.add_func("print", print);
 	
 	string name = "print";
-	funcs(name);
+	funcs(name, 0);
 
 	funcs.remove_func("p");
 	
-	funcs.add_func("add", add);
+	//funcs.add_func("add", add);
 
 	system("Pause");
 }
